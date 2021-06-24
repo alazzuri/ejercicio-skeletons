@@ -1,22 +1,32 @@
+function showLoadingSkeleton(name, order) {
+  // PASO A PASO:
+  // 1 - Deberás acceder a las cards que se encuentran renderizadas en la página,
+  // las que se encuentran vacías ya que están aguardando la información que proviene
+  // de la API.
+  // 2 - Existen dos maneras de realizar el ejercicio: puedes manipular cada una de los estilos
+  // de las cards que ya existen, o bien puedes crear un nuevo componente que represente el skeleton
+  // en su totalidad. En uno u otro caso, deberás mostrar el skeleton hasta tanto se complete el
+  // pedido de la API y tengas la información para rellenar cada una de las cards de los pokemnons.
+  // TIPS:
+  // - Si optas por crear un nuevo componente, puedes tomar como ejemplo la estructura HTML que se encuentra
+  // en el archivo utils_NO_TOCAR.js. Recuerda no editar ese archivo directamente, sino que debes escribir el
+  // código necesario en este archivo script.js
+  // - En cualquier caso, puedes utilizar los estilos que se encuentran en el archivo styles.css, dentro de los
+  // cuales podrás encontrar algunos que te serán de utilidad para realizar la actividad.
+  // - Recuerda prestar atención al momento en que tienes que mostrar/ocultar los skeletons y las cards de los
+  // pokemons. Puede que no todo el código deba escribirse en el mismo lugar 👀
+}
+
 async function fillPokemonData(name, order) {
-  //NO TOCAR - ESTA VARIABLE CONTIENE LA INFORMACION SOBRE LOS POKEMONS
+  //NO TOCAR - ESTA VARIABLE CONTIENE LA INFORMACIÓN SOBRE LOS POKEMONS,
+  // QUE USARÁS PARA COMPLETAR LAS ACTIVIDADES
   const pokemonData = await getPokemonData(name);
 
-  //Actividades
-
-  // 1) Insertar la imagen del pokemon dentro cada card. Para ello,
-  // puedes explorar los elementos HTML utilizando las Dev Tools de tu
-  // navegador.
+  // EL SIGUIENTE CODIGO RENDERIZARÁ LAS CARDS DE LOS POKEMONS, UNA VEZ OBTENIDA
+  // LA INFORMACION DEL SERVIDOR.
   const imagen = document.querySelector(`#imagen-pokemon-${order}`);
   imagen.src = pokemonData.imagen;
 
-  // 2) Utilizando los stats de cada pokemon, deberas rellenar cada una de las
-  // barras que figuran en la card. Dependiendo de la cantidad de cada atributo
-  // deberas decidir el color que tendra la barra en cada caso:
-  // Si la habilidad es menor a 35, la barra sera de color rojo
-  // Si la habilidad es mayor o igual a 35 pero menor que 70, la barra sera amarilla
-  // Si la habilidad es igual o mayor a 70, la barra sera de color verde.
-  // Deberas utilizar las clases que se encuentran en el archivo styles.css
   pokemonData.stats.forEach((stat) => {
     const barra = document.querySelector(`#barra-${stat.name}-${order}`);
 
@@ -32,12 +42,14 @@ async function fillPokemonData(name, order) {
   });
 }
 
-//LISTADO DE POKEMONS - PUEDES CAMBIAR POR TU FAVOTIRO!
+//LISTADO DE POKEMONS - PUEDES CAMBIAR POR TU FAVORITO!
 const pokemons = ["pikachu", "bulbasaur", "charmander", "diglett"];
 
 //INICIALIZADOR - NO TOCAR
 pokemons.forEach((pokemon, index) => {
   const pokemonNumber = index + 1;
   createPokemonCard(pokemon, pokemonNumber);
-  fillPokemonData(pokemon, pokemonNumber);
+  showLoadingSkeleton(pokemon, pokemonNumber);
+  // Simulamos una demora en la carga de los recursos.
+  setTimeout(() => fillPokemonData(pokemon, pokemonNumber), 3000);
 });

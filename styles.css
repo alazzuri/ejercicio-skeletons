@@ -37,7 +37,8 @@ header img {
   margin-left: 1rem;
 }
 
-.card {
+.card,
+.card-loader {
   width: 20%;
   min-width: 13rem;
   margin: 1rem;
@@ -82,4 +83,60 @@ header img {
 .amarillo {
   height: 100%;
   background-color: yellow;
+}
+
+.imagen-loader {
+  max-width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  animation: animacionDeCarga 2s infinite;
+  padding: 2rem;
+  margin: 2rem auto;
+  margin-top: 2.2rem;
+}
+
+.cuerpo-card-loader {
+  padding: 1rem;
+}
+
+.titulo-card-loader {
+  animation: animacionDeCarga 2s infinite;
+  padding: 1.2rem;
+}
+
+.texto-card-loader {
+  animation: animacionDeCarga 2s infinite;
+  padding: 0.8rem;
+}
+.nombre-skill-loader {
+  animation: animacionDeCarga 2s infinite;
+  padding: 0.5rem;
+  width: 60px;
+  display: block;
+}
+
+.contenedor-barra-loader {
+  animation: animacionDeCarga 2s infinite;
+  padding: 0.5rem;
+  margin: 0.4rem auto;
+  display: block;
+  border-radius: 20px;
+}
+
+.oculto {
+  display: none;
+}
+
+@keyframes animacionDeCarga {
+  0% {
+    background-color: transparent;
+  }
+
+  50% {
+    background-color: lightgrey;
+  }
+
+  100% {
+    background-color: transparent;
+  }
 }
